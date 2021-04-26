@@ -52,6 +52,18 @@
             <p class="text-danger">@error('published_at') {{ $message }} @enderror</p>
          </div>
          <div class="form-group">
+            <label for="category_id">Category</label>
+            <select name="category_id" id="category_id" class="form-control">
+               @foreach ($categories as $category)
+               <option value="{{ $category->id }}" @if(isset($post)) @if($category->id === $post->category_id)
+                  selected
+                  @endif
+                  @endif
+                  >{{ $category->name }}</option>
+               @endforeach
+            </select>
+         </div>
+         <div class="form-group">
             <input type="submit" value="{{ isset($post) ? 'Update' : 'Create' }} post"
                class="btn {{ isset($post) ? 'btn-info' : 'btn-success' }}">
          </div>

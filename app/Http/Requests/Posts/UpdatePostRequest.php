@@ -29,6 +29,7 @@ class UpdatePostRequest extends FormRequest
             'description'=> 'required',
             'content'=> 'required',
             'published_at'=> 'nullable',
+            'category_id'=> 'required',
         ];
     }
 }

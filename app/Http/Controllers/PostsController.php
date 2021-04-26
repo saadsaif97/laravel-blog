@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Posts\CreatingPostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -27,7 +26,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->with('categories',Category::all());
     }
 
     /**
@@ -39,6 +38,7 @@ class PostsController extends Controller
     public function store(CreatingPostRequest $request)
     {
         
+
         $image = $request->image->store('posts');
 
         Post::create([
@@ -47,6 +47,7 @@ class PostsController extends Controller
             'content'=> $request->content,
             'image'=> $image,
             'published_at'=> $request->published_at,
+            'category_id'=> $request->category_id,
         ]);
 
         session()->flash('success','Post created succesully');
@@ -73,7 +74,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create', compact('post'));
+        return view('posts.create', compact('post'))->with('categories',Category::all());
     }
 
     /**
@@ -85,7 +86,7 @@ class PostsController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->only('title','description','content','published_at');
+        $data = $request->only('title','description','content','published_at', 'category_id');
 
         if ($request->hasFile('image')) {
 
@@ -93,11 +94,11 @@ class PostsController extends Controller
             
             $data['image'] = $image;
             
-            Storage::delete($post->image);
+            $post->deleteImage();
         }
 
         $post->update($data);
-        
+
         session()->flash('success','Post updated successfully');
 
         return redirect(route('post.index'));
@@ -116,7 +117,7 @@ class PostsController extends Controller
 
         if ($post->trashed()) {
 
-            Storage::delete($post->image);
+            $post->deleteImage();
             $post->forceDelete();
 
         }else{
@@ -148,14 +149,15 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore($id){
-
+    public function restore($id)
+    {
+        // we cannot use route model binding here because post is already deleted
         $post = Post::withTrashed()->where('id',$id)->firstOrFail();
 
         $post->restore();
 
         session()->flash('success','Post restored successfully');
 
-        return redirect(route('post.index'));
+        return redirect()->back();
     }
 }

@@ -23,12 +23,14 @@ class CreatingPostRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'title'=> 'required|unique:posts,title',
             'description'=> 'required',
             'content'=> 'required',
             'image'=> 'required|image',
             'published_at'=> 'nullable',
+            'category_id'=> 'required',
         ];
     }
 }

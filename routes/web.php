@@ -27,4 +27,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('category', CategoriesController::class);
 Route::resource('post', PostsController::class);
 Route::get('trashed-posts', [PostsController::class, 'trashed'])->name('trashed-posts.index');
-Route::get('trashed-posts/{id}', [PostsController::class, 'restore'])->name('trashed-posts.restore');
+Route::put('trashed-posts/{id}', [PostsController::class, 'restore'])->name('trashed-posts.restore');
