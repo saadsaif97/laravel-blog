@@ -23,6 +23,7 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules()
     {
+        // always lower the name of category
         $this->name = strtolower($this->name);
 
         return [

@@ -99,6 +99,9 @@
                                     <a href="/post">Post</a>
                                 </li>
                                 <li class="list-group-item">
+                                    <a href="/tag">Tags</a>
+                                </li>
+                                <li class="list-group-item">
                                     <a href="/category">Categories</a>
                                 </li>
                             </ul>
@@ -111,6 +114,9 @@
                         </div>
 
                         <div class="col-12 col-md-8">
+
+                            @include('inc.flash-message')
+
                             @yield('content')
                         </div>
                     </div>

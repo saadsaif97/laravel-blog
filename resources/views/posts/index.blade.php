@@ -12,15 +12,9 @@
    </div>
    <div class="card-body">
 
-      @if(session()->has('success'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-         <strong>{{ session()->get('success') }}</strong>
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      @endif
-
+      @if(count($posts) === 0)
+      <h3>No post in the list yet</h3>
+      @else
       <table class="table table-responsive w-100">
          <thead class="w-100">
             <th>Image</th>
@@ -30,14 +24,17 @@
             <th></th>
          </thead>
          <tbody class="w-100">
-            @forelse($posts as $post)
+            @foreach($posts as $post)
+
             <tr>
                <td><img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}"
                      style="width: 100px; height: auto;">
                </td>
                <td>{{ $post->title }}</td>
 
-               <td><a href="{{ route('category.edit', $post->category->id) }}">{{ $post->category->name }} </a> </td>
+               <td>
+                  <a href="{{ route('category.edit', $post->category->id) }}">{{ $post->category->name }} </a>
+               </td>
 
                @if($post->trashed())
                <td>
@@ -59,11 +56,10 @@
                </td>
 
             </tr>
-            @empty
-            <td>No post in list</td>
-            @endforelse
+            @endforeach
          </tbody>
       </table>
+      @endif
 
    </div>
 </div>

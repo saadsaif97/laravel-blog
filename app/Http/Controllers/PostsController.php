@@ -10,6 +10,18 @@ use App\Models\Post;
 class PostsController extends Controller
 {
     /**
+     * This middleware checks category count.
+     * 
+     * If no category in list, redirect to create category route 
+     * with warning flash message.
+     */
+    public function __construct()
+    {
+        $this->middleware('verifyCategoriesCount')->only(['create','store']);
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -140,7 +152,7 @@ class PostsController extends Controller
      */
     public function trashed(){
 
-        return view('posts.index')->with('posts',Post::onlyTrashed()->get());
+        return view('posts.index')->with('posts',Post::withTrashed()->get());
     }
 
     /**

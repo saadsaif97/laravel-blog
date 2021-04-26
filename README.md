@@ -67,3 +67,25 @@ return view('categories.index')->with('categories',Category::all());
 }
 
 ```
+
+To use a custom middleware first register in kernal.php then use in route
+or constructor function of controller (I used with only)
+
+```
+   public function __construct()
+   {
+      $this->middleware('verifyCategoriesCount')->only(['create','store']);
+   }
+```
+
+Before copy paste in views verify
+
+```
+That no relationship from previous view comes in new view
+```
+
+When there is no category in list and you call the relation on it in trashed view,
+error arises. So you have to cascade delete the relationship.
+
+when you have to create a foreign id (category_id) in posts, categories table should be migrated before posts table
+you can play with migration timestamp to play with migration order
