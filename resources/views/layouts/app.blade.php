@@ -19,6 +19,8 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        @yield('css')
     </head>
 
     <body>
@@ -87,10 +89,16 @@
                         <div class="col-12 col-md-4">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="#">Post</a>
+                                    <a href="/post">Post</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="/category">Categories</a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-group mt-4">
+                                <li class="list-group-item">
+                                    <a href="{{ route('trashed-posts.index') }}">Trashed posts</a>
                                 </li>
                             </ul>
                         </div>
