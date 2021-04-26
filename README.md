@@ -46,8 +46,8 @@ we can use route model binding to restore the post that is deleted already
    }
 ```
 
-```
 when I was sending $categories as compact('categories') to category index view, relationship was not working
+
 ```
 
 public function index()
@@ -56,14 +56,14 @@ return view('categories.index',compact('categories'));
 }
 
 ```
+
 But changing to Categories::all() it worked.
+
 ```
 
 public function index()
 {
 return view('categories.index')->with('categories',Category::all());
 }
-
-```
 
 ```
