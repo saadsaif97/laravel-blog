@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Categories\CreateCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -16,10 +15,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-
-        $categories = DB::table('categories')->get();
-
-        return view('categories.index', compact('categories'));
+        return view('categories.index')->with('categories',Category::all());
     }
 
     /**

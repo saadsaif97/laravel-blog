@@ -24,6 +24,12 @@ accessing the asset from storage in view
 restore the post using put method and not simply get method because it could be easily restored if we go to that route
 ```
 
+In relations:
+
+```
+   $this->post gives us collection WHERE AS $this->post() gives us query builder
+```
+
 we can use route model binding to restore the post that is deleted already
 
 ```
@@ -40,8 +46,24 @@ we can use route model binding to restore the post that is deleted already
    }
 ```
 
-In relations:
+```
+when I was sending $categories as compact('categories') to category index view, relationship was not working
+```
+
+public function index()
+{
+return view('categories.index',compact('categories'));
+}
 
 ```
-   $this->post gives us collection WHERE AS $this->post() gives us query builder
+But changing to Categories::all() it worked.
+```
+
+public function index()
+{
+return view('categories.index')->with('categories',Category::all());
+}
+
+```
+
 ```

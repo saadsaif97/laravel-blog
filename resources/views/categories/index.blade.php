@@ -24,6 +24,7 @@
       <table class="table">
          <thead>
             <th>Name</th>
+            <th>Posts</th>
             <th></th>
             <th></th>
          </thead>
@@ -31,6 +32,7 @@
             @forelse($categories as $category)
             <tr>
                <td>{{ $category->name }}</td>
+               <td>{{ $category->posts->count() }}</td>
                <td><a href="{{ route('category.edit', $category->id) }}">Edit</a></td>
                <td>
                   <button class="btn btn-danger btn-sm" id="{{ $category->id }}" name="{{ $category->name }}"

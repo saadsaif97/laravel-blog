@@ -25,6 +25,7 @@
          <thead class="w-100">
             <th>Image</th>
             <th>Name</th>
+            <th>Category</th>
             <th></th>
             <th></th>
          </thead>
@@ -35,6 +36,8 @@
                      style="width: 100px; height: auto;">
                </td>
                <td>{{ $post->title }}</td>
+
+               <td><a href="{{ route('category.edit', $post->category->id) }}">{{ $post->category->name }} </a> </td>
 
                @if($post->trashed())
                <td>
