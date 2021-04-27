@@ -272,7 +272,7 @@ Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.u
 ↓↓↓↓ SOLVED (both variables should have same name) ↓↓↓↓
 </pre>
 
-Does not exits in this case
+Does exits in this case
 
 -   Route
 
