@@ -225,7 +225,7 @@ select2 worked when I moved scripts from head to bottom of body as:
 
 ---
 
-preventing the category and tag to be deleted if it has some post as:
+preventing the category and tag to be deleted if associated with some post as:
 
 ```
 if ($tag->posts->count() > 0) {
@@ -233,4 +233,58 @@ if ($tag->posts->count() > 0) {
 
    return redirect()->back();
 }
+```
+
+if we don't do this and delete the tag or category associated with some post,
+it will cause bugs in view because the view will try access the deleted category or post
+
+---
+
+there was error in user index view and I did'nt read the error carefully and searched it in route and layout index
+
+---
+
+### Route model binding
+
+Does not exits in this case
+
+<pre>
+↓↓↓↓ NOT EXITS ↓↓↓↓
+</pre>
+
+-   Route
+
+```
+Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
+```
+
+-   Method
+
+```
+   public function update(User $user)
+   {
+      dd($user->role);
+   }
+
+```
+
+<pre>
+↓↓↓↓ SOLVED (both variables should have same name) ↓↓↓↓
+</pre>
+
+Does not exits in this case
+
+-   Route
+
+```
+Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
+```
+
+-   Method
+
+```
+   public function update(User $user)
+   {
+      dd($user->role);
+   }
 ```

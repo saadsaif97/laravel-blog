@@ -96,7 +96,7 @@ class TagController extends Controller
     {
 
         if ($tag->posts->count() > 0) {
-            session()->flash('error', 'Tag cannot be deleted as it has posts.');    
+            session()->flash('error', 'Tag cannot be deleted as it is associated with some post.');    
 
             return redirect()->back();
         }

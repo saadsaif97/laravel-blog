@@ -96,7 +96,7 @@ class CategoriesController extends Controller
     {
 
         if ($category->posts->count() > 0) {
-            session()->flash('error', 'Category cannot be deleted as it has posts.');    
+            session()->flash('error', 'Category cannot be deleted as it is associated with some post.');
 
             return redirect()->back();
         }
