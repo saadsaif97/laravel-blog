@@ -6,6 +6,7 @@ use App\Http\Requests\Posts\CreatingPostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostsController extends Controller
 {
@@ -38,7 +39,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create')->with('categories',Category::all());
+        return view('posts.create')->with('categories',Category::all())->with('tags', Tag::all());
     }
 
     /**
@@ -48,12 +49,11 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreatingPostRequest $request)
-    {
-        
+    {   
 
         $image = $request->image->store('posts');
 
-        Post::create([
+        $post = Post::create([
             'title'=> $request->title,
             'description'=> $request->description,
             'content'=> $request->content,
@@ -61,6 +61,11 @@ class PostsController extends Controller
             'published_at'=> $request->published_at,
             'category_id'=> $request->category_id,
         ]);
+
+        if($request->tags)
+        {
+            $post->tags()->attach($request->tags);
+        }
 
         session()->flash('success','Post created succesully');
 
@@ -86,7 +91,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create', compact('post'))->with('categories',Category::all());
+        return view('posts.create', compact('post'))->with('categories',Category::all())->with('tags', Tag::all());
     }
 
     /**
@@ -98,6 +103,7 @@ class PostsController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+
         $data = $request->only('title','description','content','published_at', 'category_id');
 
         if ($request->hasFile('image')) {
@@ -107,6 +113,11 @@ class PostsController extends Controller
             $data['image'] = $image;
             
             $post->deleteImage();
+        }
+
+        if($request->tags)
+        {
+            $post->tags()->sync($request->tags);
         }
 
         $post->update($data);

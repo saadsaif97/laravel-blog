@@ -89,3 +89,21 @@ error arises. So you have to cascade delete the relationship.
 
 when you have to create a foreign id (category_id) in posts, categories table should be migrated before posts table
 you can play with migration timestamp to play with migration order
+
+To create many to many relationship, create migration as:
+you have to follow the alphabetic order to create this table
+
+```
+php artisan make:migrate create_post_tag_table --table=post_tag
+```
+
+hasMany is used is onetomany, belongsToMany is used in manytomany
+
+For populating the pivot table, you have to use attach function in query builder in relationship as:
+
+```
+   if($request->tags)
+   {
+      $post->tags()->sync($request->tags);
+   }
+```

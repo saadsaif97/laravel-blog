@@ -63,6 +63,29 @@
                @endforeach
             </select>
          </div>
+
+         @if(count($tags) > 0)
+         <div class="form-group">
+            <label for="tags">Tags</label>
+            <select name="tags[]" id="tags" class="form-control custom-select" aria-describedby="tagsHelp" multiple>
+               @foreach($tags as $tag)
+               <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+               @endforeach
+            </select>
+            <small id="tagsHelp" class="form-text text-muted">
+               Selecting multiple tags vary in different operating systems and browsers:
+               <ul>
+                  <li>
+                     For windows: Hold down the control (ctrl) button to select multiple options
+                  </li>
+                  <li>
+                     For Mac: Hold down the command button to select multiple options
+                  </li>
+               </ul>
+            </small>
+         </div>
+         @endif
+
          <div class="form-group">
             <input type="submit" value="{{ isset($post) ? 'Update' : 'Create' }} post"
                class="btn {{ isset($post) ? 'btn-info' : 'btn-success' }}">
