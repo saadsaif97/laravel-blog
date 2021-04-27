@@ -107,3 +107,17 @@ For populating the pivot table, you have to use attach function in query builder
       $post->tags()->sync($request->tags);
    }
 ```
+
+For making multiple select pass the name as:
+
+```
+<select name="tags[]" multiple></select>
+```
+
+and
+
+```
+Selecting multiple tags vary in different operating systems and browsers:
+- For windows: Hold down the control (ctrl) button to select multiple options
+- For Mac: Hold down the command button to select multiple options
+```
