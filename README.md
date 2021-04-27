@@ -121,3 +121,87 @@ Selecting multiple tags vary in different operating systems and browsers:
 - For windows: Hold down the control (ctrl) button to select multiple options
 - For Mac: Hold down the command button to select multiple options
 ```
+
+---
+
+without plucking post tags collects are as:
+
+<pre>
+   $post->tags->toArray()
+</pre>
+
+```
+array:2 [▼
+  0 => array:5 [▼
+    "id" => 1
+    "name" => "next.js"
+    "created_at" => "2021-04-27T00:47:05.000000Z"
+    "updated_at" => "2021-04-27T00:47:05.000000Z"
+    "pivot" => array:2 [▼
+      "post_id" => 3
+      "tag_id" => 1
+    ]
+  ]
+  1 => array:5 [▼
+    "id" => 2
+    "name" => "laravel"
+    "created_at" => "2021-04-27T00:47:13.000000Z"
+    "updated_at" => "2021-04-27T00:47:13.000000Z"
+    "pivot" => array:2 [▼
+      "post_id" => 3
+      "tag_id" => 2
+    ]
+  ]
+]
+```
+
+we can pluck from arrays of collections as:
+
+<pre>
+in_array($tag->id, $post->tags->pluck('id')->toArray())
+</pre>
+
+```
+array:2 [▼
+  0 => 1
+  1 => 2
+]
+```
+
+---
+
+make function in post model as:
+
+```
+   public function hasTag($id)
+   {
+      return in_array($id, $this->tags->pluck('id')->toArray());
+   }
+```
+
+to minimize the cod ein view from:
+
+```
+@if(in_array($tag->id, $post->tags->pluck('id')->toArray()))
+   selected
+@endif
+```
+
+to:
+
+```
+@if($post->hasTag($tag->id))
+   selected
+@endif
+```
+
+---
+
+to update the many to many relationship, use sync method as:
+
+```
+   if($request->tags)
+   {
+      $post->tags()->sync($request->tags);
+   }
+```

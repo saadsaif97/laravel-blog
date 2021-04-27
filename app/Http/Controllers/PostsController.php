@@ -104,6 +104,7 @@ class PostsController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
 
+
         $data = $request->only('title','description','content','published_at', 'category_id');
 
         if ($request->hasFile('image')) {

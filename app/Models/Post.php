@@ -34,4 +34,16 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    /**
+     * Checks if this post has tag id
+     * 
+     * return boolean
+     */
+
+    public function hasTag($id)
+    {
+        return in_array($id, $this->tags->pluck('id')->toArray());
+    }
+
 }

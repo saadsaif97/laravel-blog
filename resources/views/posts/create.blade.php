@@ -63,13 +63,18 @@
                @endforeach
             </select>
          </div>
-
          @if(count($tags) > 0)
          <div class="form-group">
             <label for="tags">Tags</label>
             <select name="tags[]" id="tags" class="form-control custom-select" aria-describedby="tagsHelp" multiple>
                @foreach($tags as $tag)
-               <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+               <option value="{{ $tag->id }}" 
+                  @if(isset($post))
+                     @if($post->hasTag($tag->id))
+                     selected
+                     @endif
+                  @endif
+                  >{{ $tag->name }}</option>
                @endforeach
             </select>
             <small id="tagsHelp" class="form-text text-muted">
