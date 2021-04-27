@@ -288,3 +288,7 @@ Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user
       dd($user->role);
    }
 ```
+
+---
+
+To avoid conflict, name the route, mode and the view folder same name. i.e; no singular and plural only singular

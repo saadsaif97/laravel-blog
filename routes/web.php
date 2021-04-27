@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth', 'admin'])->group(function () {
     
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
+    Route::put('/user/{user}/make_admin', [UserController::class, 'make_admin'])->name('user.make_admin');
 
 });
