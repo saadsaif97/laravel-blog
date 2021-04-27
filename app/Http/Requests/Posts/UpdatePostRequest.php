@@ -3,6 +3,10 @@
 namespace App\Http\Requests\Posts;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Route;
+use Illuminate\Validation\Rule;
+
+use function PHPSTORM_META\type;
 
 class UpdatePostRequest extends FormRequest
 {
@@ -20,12 +24,16 @@ class UpdatePostRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array
-     */
+    */
     public function rules()
     {
 
+
         return [
-            'title'=> 'required|unique:posts,title,'.$this->post['id'],
+            'title'=> [
+                "required",
+                Rule::unique('posts')->ignore($this->post)
+            ],
             'description'=> 'required',
             'content'=> 'required',
             'published_at'=> 'nullable',

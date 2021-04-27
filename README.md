@@ -292,3 +292,28 @@ Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user
 ---
 
 To avoid conflict, name the route, mode and the view folder same name. i.e; no singular and plural only singular
+
+---
+
+In custom request, id of was accessed as:
+
+```
+$this->post->id  AND NOT AS: $this->id
+```
+
+Because post comes in the route through route model binding, not the ID
+
+---
+
+<pre>
+all posts had same name coming from seedr, therefore unique ignore qas not able applied
+</pre>
+
+you can ignore as:
+
+```
+'title'=> [
+   "required",
+   Rule::unique('posts')->ignore($this->post)
+],
+```

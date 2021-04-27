@@ -68,26 +68,13 @@
             <label for="tags">Tags</label>
             <select name="tags[]" id="tags" class="form-control custom-select" aria-describedby="tagsHelp" multiple>
                @foreach($tags as $tag)
-               <option value="{{ $tag->id }}" 
-                  @if(isset($post))
-                     @if($post->hasTag($tag->id))
-                     selected
-                     @endif
+               <option value="{{ $tag->id }}" @if(isset($post)) @if($post->hasTag($tag->id))
+                  selected
+                  @endif
                   @endif
                   >{{ $tag->name }}</option>
                @endforeach
             </select>
-            <small id="tagsHelp" class="form-text text-muted">
-               Selecting multiple tags vary in different operating systems and browsers:
-               <ul>
-                  <li>
-                     For windows: Hold down the control (ctrl) button to select multiple options
-                  </li>
-                  <li>
-                     For Mac: Hold down the command button to select multiple options
-                  </li>
-               </ul>
-            </small>
          </div>
          @endif
 
@@ -119,15 +106,15 @@
 
 <script>
 
-   document.addEventListener('DOMContentLoaded',function () {
-      
+   document.addEventListener('DOMContentLoaded', function () {
+
       // for date flatpicker
       const published_at = document.getElementById("published_at");
       const fp = flatpickr(published_at, { enableTime: true });  // flatpickr
-   
+
       // for select2 tags selector
       $('#tags').select2();
-      
+
    })
 
 </script>
