@@ -124,7 +124,7 @@ Selecting multiple tags vary in different operating systems and browsers:
 
 ---
 
-without plucking post tags collects are as:
+without plucking post tags collections are as:
 
 <pre>
    $post->tags->toArray()
@@ -179,7 +179,7 @@ make function in post model as:
    }
 ```
 
-to minimize the cod ein view from:
+to minimize the code in view from:
 
 ```
 @if(in_array($tag->id, $post->tags->pluck('id')->toArray()))
@@ -204,4 +204,33 @@ to update the many to many relationship, use sync method as:
    {
       $post->tags()->sync($request->tags);
    }
+```
+
+---
+
+select2 worked when I moved scripts from head to bottom of body as:
+
+```
+<body>
+   <div id="app">
+   ...
+   </div>
+
+   <!-- Scripts -->
+   <script src="{{ asset('js/app.js') }}"></script>
+
+   @yield('scripts')
+</body>
+```
+
+---
+
+preventing the category and tag to be deleted if it has some post as:
+
+```
+if ($tag->posts->count() > 0) {
+   session()->flash('error', 'Tag cannot be deleted as it has posts.');
+
+   return redirect()->back();
+}
 ```

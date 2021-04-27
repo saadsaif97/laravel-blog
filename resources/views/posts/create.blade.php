@@ -107,6 +107,7 @@
    integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA=="
    crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('scripts')
@@ -114,9 +115,20 @@
    integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg=="
    crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-   const published_at = document.getElementById("published_at");
-   const fp = flatpickr(published_at, { enableTime: true });  // flatpickr
+
+   document.addEventListener('DOMContentLoaded',function () {
+      
+      // for date flatpicker
+      const published_at = document.getElementById("published_at");
+      const fp = flatpickr(published_at, { enableTime: true });  // flatpickr
+   
+      // for select2 tags selector
+      $('#tags').select2();
+      
+   })
+
 </script>
 @endsection
