@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/blog/post/{post}', [App\Http\Controllers\Blog\PostsController::class, 'index'])->name('blog.index');
+Route::get('/blog/category/{category}', [WelcomeController::class, 'category'])->name('blog.category');
+Route::get('/blog/tag/{tag}', [WelcomeController::class, 'tag'])->name('blog.tag');
 
 Auth::routes();
 

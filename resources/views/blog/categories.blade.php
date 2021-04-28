@@ -1,7 +1,6 @@
 @extends('layouts.welcome')
 
-@section('title', 'SaaS Blog')
-
+@section('title', "$category->name")
 
 
 @section('header')
@@ -13,8 +12,10 @@
       <div class="row">
          <div class="col-md-8 mx-auto">
 
-            <h1>Latest Blog Posts</h1>
-            <p class="lead-2 opacity-90 mt-6">Read and get updated on how we progress</p>
+            <h1>Category: {{ $category->name }}</h1>
+            <p class="lead-2 opacity-90 mt-6">Total: {{ $category->posts->count() }}
+               {{ Str::plural('post', $category->posts->count()) }}
+            </p>
 
          </div>
       </div>
@@ -31,9 +32,11 @@
       <div class="container">
          <div class="row">
 
+
             <div class="col-md-8 col-xl-9">
 
                @include('inc.search-heading')
+
 
                <div class="row gap-y">
 

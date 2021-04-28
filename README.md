@@ -362,9 +362,81 @@ if we go to the next page during search, our search query vapourizes. So, we hav
 pagination provided by laravel as:
 
 ```
-$posts()->append(['search'=> request()->query('search')])->links()
+$posts()->appends(['search'=> request()->query('search')])->links()
 ```
 
 in this way we will not lose our search query when going to next page
 
 ---
+
+if we place target in place for action in form, form will be submitted to that page in new tab
+
+---
+
+@forelse
+@empty
+@endforelse
+
+---
+
+in the head, you cannot put title as:
+
+```
+@section('title', '{{ $category->name }}')  IT WILL NOT SHOW PROPERLY
+```
+
+You can write as:
+
+```
+@section('title', "$category->name")
+```
+
+---
+
+pluralize a string using:
+
+```
+{{ Str::plural('post', $category->posts->count()) }}
+```
+
+---
+
+you have to submit search form on same page for using it on latest blog page, tag->posts page category->posts page
+
+---
+
+addthis this tool lets you share your post to social media
+
+---
+
+scoping the query
+
+```
+class User extends Model {
+
+    public function scopePopular($query)
+    {
+        return $query->where('votes', '>', 100);
+    }
+
+    public function scopeWomen($query)
+    {
+        return $query->whereGender('W');
+    }
+}
+
+Utilizing A Query Scope
+
+$users = User::popular()->women()->orderBy('created_at')->get();
+```
+
+---
+
+type casting can be done as:
+
+```
+protected $dates = [
+      'published_at',
+];
+
+```

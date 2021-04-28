@@ -14,6 +14,11 @@ class Post extends Model
 
     protected $fillable = ['title','description','content','image','category_id','published_at','user_id'];
 
+    protected $dates = [
+        'published_at',  
+    ];
+ 
+
     /**
      * Deletes the image from storage
      * 
@@ -49,5 +54,28 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Scoping the published posts
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published_at','<=',now());
+    }
+
+    /**
+     * Query scoping if, the request has search
+     * 
+     */
+    public function scopeSearched($query)
+    {
+        $search = request()->query('search');
+
+        if ($search) {
+            return $query->published()->where('title','LIKE',"%{$search}%");
+        }else{
+            return $query->published();
+        }
     }
 }

@@ -58,7 +58,10 @@
             </section>
 
             @auth
-            <a class="btn btn-xs btn-round btn-secondary" href="{{ route('logout') }}">Logout</a>
+            <form action="{{ route('logout') }}" method="post">
+               @csrf
+               <button type="submit" class="btn btn-xs btn-round btn-secondary">Logout</button>
+            </form>
             @else
             <a class="btn btn-xs btn-round btn-success" href="{{ route('login') }}">Login</a>
             @endauth
@@ -103,6 +106,8 @@
       <script id="dsq-count-scr" src="//blog-cms-7.disqus.com/count.js" async></script>
       @yield('scripts')
 
+      <!-- addthis (sharing tool) -->
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6089bda0dfd6553b"></script>
    </body>
 
 </html>
