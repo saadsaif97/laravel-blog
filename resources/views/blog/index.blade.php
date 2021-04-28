@@ -48,11 +48,20 @@
 
          <div class="row">
             <div class="col-lg-8 mx-auto">
+               <div class="gap-xy-2 mt-6">
+                  {!! $post->content !!}
+               </div>
+            </div>
 
-               {!! $post->content !!}
+            <div class="col-lg-8 mx-auto">
+               <div class="gap-xy-2 mt-6 d-flex flex-column">
+                  <p>You can also share this post:</p>
+                  <!-- sharing tool -->
+                  <div class="addthis_inline_share_toolbox"></div>
+               </div>
+            </div>
 
-               <!-- sharing tool -->
-               <div class="addthis_inline_share_toolbox"></div>
+            <div class="col-lg-8 mx-auto">
 
                <div class="gap-xy-2 mt-6">
 
