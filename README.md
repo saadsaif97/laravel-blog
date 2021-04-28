@@ -317,3 +317,15 @@ you can ignore as:
    Rule::unique('posts')->ignore($this->post)
 ],
 ```
+
+we can render html in blade as:
+
+```
+{{!! $post->content !!}}
+```
+
+Disqus requires the full url of page, we can provide through:
+
+```
+config('app.url')/blog/post/$post->id
+```

@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class PostTableSeeder extends Seeder
 {
@@ -16,6 +18,20 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
+
+
+        $user1 = User::create([
+            'name'=>'ding',
+            'email'=>'ding@gmail.com',
+            'password'=> Hash::make('password'),
+        ]);
+        $user2 = User::create([
+            'name'=>'dong',
+            'email'=>'dong@gmail.com',
+            'password'=> Hash::make('password'),
+        ]);
+
+
         $category1 = Category::create([
             'name'=>'code'
         ]);
@@ -36,6 +52,7 @@ A then low win variety own this every real all the salesman be I don't thin it i
 ",
             'image'=>'posts/1.jpg',
             'category_id'=> $category1->id,
+            'user_id'=> $user1->id,
         ]);
         $post2= Post::create([
             'title'=>'Top 5 brilliant content marketing strategies',
@@ -46,6 +63,7 @@ A then low win variety own this every real all the salesman be I don't thin it i
 ",
             'image'=>'posts/2.jpg',
             'category_id'=> $category2->id,
+            'user_id'=> $user1->id,
         ]);
         $post3= Post::create([
             'title'=>'Best practices for minimalist design with example',
@@ -56,6 +74,7 @@ A then low win variety own this every real all the salesman be I don't thin it i
 ",
             'image'=>'posts/3.jpg',
             'category_id'=> $category3->id,
+            'user_id'=> $user2->id,
         ]);
         $post4= Post::create([
             'title'=>'Congratulate and thank to Maryam for joining our team',
@@ -66,6 +85,7 @@ A then low win variety own this every real all the salesman be I don't thin it i
 ",
             'image'=>'posts/4.jpg',
             'category_id'=> $category2->id,
+            'user_id'=> $user1->id,
         ]);
 
 

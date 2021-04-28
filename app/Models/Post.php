@@ -12,7 +12,7 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title','description','content','image','category_id','published_at'];
+    protected $fillable = ['title','description','content','image','category_id','published_at','user_id'];
 
     /**
      * Deletes the image from storage
@@ -46,4 +46,8 @@ class Post extends Model
         return in_array($id, $this->tags->pluck('id')->toArray());
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
