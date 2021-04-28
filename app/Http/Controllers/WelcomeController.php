@@ -17,7 +17,7 @@ class WelcomeController extends Controller
     {
         return view('welcome')
             ->with('categories',Category::all())
-            ->with('posts',Post::all())
+            ->with('posts',Post::simplePaginate(2))
             ->with('tags',Tag::all());
     }
 }

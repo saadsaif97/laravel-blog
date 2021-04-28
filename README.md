@@ -329,3 +329,42 @@ Disqus requires the full url of page, we can provide through:
 ```
 config('app.url')/blog/post/$post->id
 ```
+
+---
+
+pagination in laravel comes out of the box
+
+```
+return view('welcome')->with('posts',Post::pagenate(2))
+```
+
+and in view you can make links as:
+
+```
+$posts->links()
+```
+
+## it will automatically make the pagenation links in your page
+
+---
+
+Publish any publishable assets from vendor packages:
+
+```
+php artisan vendor:publish
+```
+
+it publishs the default template and you can modify it easily
+
+---
+
+if we go to the next page during search, our search query vapourizes. So, we have to append the search query in
+pagination provided by laravel as:
+
+```
+$posts()->append(['search'=> request()->query('search')])->links()
+```
+
+in this way we will not lose our search query when going to next page
+
+---
